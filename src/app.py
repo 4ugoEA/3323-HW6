@@ -233,7 +233,7 @@ for x in flist:
 
 #Creating a new sorted list with all the students sorted according to Last Name, then First
 #Name and finally ID
-final = sorted(final0, key=lambda x: x.get_last_name(), reverse=False)
+final = sorted(final0, key=lambda x: (x.get_last_name(),x.get_first_name(), x.get_id()), reverse=False)
 
 # Create the HTML code for the table
 #Basic HTML string for a HTML file that inclues a title and header, as well
