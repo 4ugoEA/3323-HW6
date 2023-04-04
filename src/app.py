@@ -80,31 +80,84 @@ while(f <= (fcut)):
 
 for x in alist:
     x.set_final('A')
-    print(x.get_first_name())
-    print(x.get_grade())
-    print(x.get_final())
+    # print(x.get_first_name())
+    # print(x.get_grade())
+    # print(x.get_final())
 
 for x in blist:
     x.set_final('B')
-    print(x.get_first_name())
-    print(x.get_grade())
-    print(x.get_final())
+    # print(x.get_first_name())
+    # print(x.get_grade())
+    # print(x.get_final())
 
 for x in clist:
     x.set_final('C')
-    print(x.get_first_name())
-    print(x.get_grade())
-    print(x.get_final())
+    # print(x.get_first_name())
+    # print(x.get_grade())
+    # print(x.get_final())
 
 for x in dlist:
     x.set_final('D')
-    print(x.get_first_name())
-    print(x.get_grade())
-    print(x.get_final())
+    # print(x.get_first_name())
+    # print(x.get_grade())
+    # print(x.get_final())
 
 for x in flist:
     x.set_final('F')
-    print(x.get_first_name())
-    print(x.get_grade())
-    print(x.get_final())
+    # print(x.get_first_name())
+    # print(x.get_grade())
+    # print(x.get_final())
+
+
+# temp3 = temp1.extend(temp2)
+# final = temp3.extend(flist)
+
+# Create the HTML code for the table
+table_html = """<html>
+<head>
+<title>Grades</title>
+</head>
+<body>
+<h2>PPL 3323 Homework 6</h2><table>\n
+
+<tr><th>ID</th><th>First</th><th>Last</th><th>Final</th></tr>\n"""
+# Data rows
+for student in alist:
+    table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
+for student in blist:
+    table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
+for student in clist:
+    table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
+for student in dlist:
+    table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
+for student in flist:
+    table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
+
+table_html += """</table> </body>\n
+    </html>"""
+
+
+# Print the HTML code to the console
+print(table_html)
+
+f = open('output.html', 'w')
+  
+# the html code which will go in the file GFG.html
+html_template = """<html>
+<head>
+<title>Title</title>
+</head>
+<body>
+<h2>Welcome To GFG</h2>
+
+  
+</body>
+</html>
+"""
+  
+# writing the code into the file
+f.write(table_html)
+  
+# close the file
+f.close()
 
