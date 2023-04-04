@@ -5,11 +5,20 @@ d = "11"
 for line in contents:
     s =  [d+e for e in contents.split(d) if e]
 
-res = []
+rest = []
 for sub in s:
-    res.append(sub.replace("\n", " "))
+    rest.append(sub.replace("\n", "|"))
 
-#print(contents.split("11"))
+rest2 = []
+for sub in rest:
+    rest2.append(sub.replace("||", " "))
 
-print(res)
-print(len(res))
+res = []
+for sub in rest2:
+    res.append(sub.replace("|", " "))
+
+
+
+#print(contents)
+#print(res[1])
+# print(len(res))
