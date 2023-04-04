@@ -1,3 +1,7 @@
+#author: Hugo E. Atayde
+
+#Student class to hold attributes for each student, such as id, first and last name, 
+#eager or lazy, number grade and final grade
 class student:
    
     def __init__(self, id, first_name, last_name, grade, l, f):
@@ -41,35 +45,58 @@ class student:
     def get_final(self):
         return self.final
 
-
+#The following line parses the text file as a string 
+# and stores it in contents
 with open("src\input.txt") as f:
     contents = f.read();
 
+#These lines separate each students record using the first 2 digits
+#of their id, "11", then joins them in the list "s"
 d = "11"
 for line in contents:
     s =  [d+e for e in contents.split(d) if e]
 
+#These lines handle any new lines that might be scattered
+#in our data and replaces them with temp character
 rest = []
 for sub in s:
     rest.append(sub.replace("\n", "|"))
 
+#These lines find any of the temp characters and then replace 
+#them with spaces
 rest2 = []
 for sub in rest:
     rest2.append(sub.replace("||", " "))
 
+#Additional string cleanup to make sure there are no 
+#temp characters left
 res = []
 for sub in rest2:
     res.append(sub.replace("|", " "))
 
+#Probably don't need Rec, but it helps to separate each 
+#step
 Rec = res
+
+#n is the number of record entries, which is also the number of students
 n = len(Rec)
 
+#The following lines create specific ranges of indexes, in order to separate 
+#students by their potential grades
+
+#The top n/3 students are A's
+#The following n/3 + 1 to 2n/3 are B's
+#Anything between B's and F's are either C's or D's, that is determined later
+#F's set as the bottom n/10 students
 astart = 0
 acut = (n // 3) - 1
 bstart = acut + 1
 bcut = (2 * (n // 3)) - 1
 cdstart = bcut + 1
 fcut = n - 1
+
+#In the case that there are less than 10 students, the last student will be assigned F
+#but the start of the F cutoff is altered slightly
 if(n < 10):
     fstart = (n -1) - (n // 10)
 else:
@@ -88,6 +115,9 @@ cdcut = fstart - 1
 
 Students = list()
 
+#For each record stored in Rec, we create a new student using the first 5 values in 
+#each record, which will be ID, First Name, Last Name, Number Grade, and Eager/Lazy
+#We then add each student to the list "Students"
 for x in Rec:
     s = x.split(" ")
     temp = student(int(s[0]), s[1], s[2], int(s[3]), s[4], 'f')
@@ -99,24 +129,35 @@ for x in Rec:
 # print((Students[2].get_grade()))
 # print((Students[2].get_letter()))
 
+#This is probably the most important part:
+#We take our list of Student objects and sort them by their grade, in descending order, then 
+#by their Eager/Lazy value. This is done by having our key be a tuple, created
+#by two functions, get_grade() and get_letter(). The grade comparison will be a 
+#integer and the letter is a character. 
 gradeSort = sorted(Students, key=lambda x: (-x.get_grade(), x.get_letter()))
 
 # for x in gradeSort:
 #     print(x.get_first_name())
 #     print(x.get_grade())
 #     print(x.get_letter())
-    
+
+#We create five lists, one for each letter grade, just for easier looping
+#and for assigning final grades
 alist = list()
 blist = list()
 clist = list()
 dlist = list()
 flist = list()
 
+#These four variables are counters to keep track of each grade cutoff,
+#while we are adding each student to their respective list
 a = astart
 b = bstart
 c = cdstart
 f = fstart
 
+#These while loops are used to interate over specific indexes in our sorted list
+#that correlate to our calculated cutoffs that were declared earlier
 while(a <= (acut)):
     alist.append(gradeSort[a])
     a += 1
@@ -125,6 +166,9 @@ while(b <= (bcut)):
     blist.append(gradeSort[b])
     b += 1
 
+#Since the C's and D's are any indexes not covered by the A's, B's or F's, we add
+#an extra if else, that assigns the student to the C's or D's, based on their 
+#Eager/Lazy value
 while(c <= (cdcut)):
     if(gradeSort[c].get_letter() == 'E'):
         clist.append(gradeSort[c])
@@ -137,7 +181,8 @@ while(f <= (fcut)):
     flist.append(gradeSort[f])
     f += 1
 
-
+#This for loops simply go through each letter grade list and sets each student's
+#final grade to their respective list grade
 for x in alist:
     x.set_final('A')
     # print(x.get_first_name())
@@ -169,10 +214,9 @@ for x in flist:
     # print(x.get_final())
 
 
-# temp3 = temp1.extend(temp2)
-# final = temp3.extend(flist)
-
 # Create the HTML code for the table
+#Basic HTML string for a HTML file that inclues a title and header, as well
+#as a header for the table
 table_html = """<html>
 <head>
 <title>Grades</title>
@@ -182,6 +226,9 @@ table_html = """<html>
 
 <tr><th>ID</th><th>First</th><th>Last</th><th>Final</th></tr>\n"""
 # Data rows
+#Here we are iterating over each letter grade list, "alist" to "flist", and creating 
+#a row, filled with that students information, ID, First Name, Last Name and Final Grade
+#Every row is added on to our original HTML string
 for student in alist:
     table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
 for student in blist:
@@ -193,31 +240,34 @@ for student in dlist:
 for student in flist:
     table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
 
+#This is the final bit of HTML code to make sure our HTML file is complete
 table_html += """</table> </body>\n
     </html>"""
 
 
 # Print the HTML code to the console
+#Not that necessary, but its good to check that the string is formatted correctly
 print(table_html)
 
+#We create and open a new file called "output.html" and begin writing into it
 f = open('output.html', 'w')
   
-# the html code which will go in the file GFG.html
-html_template = """<html>
-<head>
-<title>Title</title>
-</head>
-<body>
-<h2>Welcome To GFG</h2>
+# # the html code which will go in the file GFG.html
+# html_template = """<html>
+# <head>
+# <title>Title</title>
+# </head>
+# <body>
+# <h2>Welcome To GFG</h2>
 
   
-</body>
-</html>
-"""
+# </body>
+# </html>
+# """
   
-# writing the code into the file
+# Writing the code from the string we created above into the file
 f.write(table_html)
   
-# close the file
+#Close the file
 f.close()
 
