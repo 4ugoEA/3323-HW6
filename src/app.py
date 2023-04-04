@@ -241,6 +241,19 @@ final = sorted(final0, key=lambda x: (x.get_last_name(),x.get_first_name(), x.ge
 table_html = """<html>
 <head>
 <title>Grades</title>
+<style>
+         table, th, td {
+            border: 1px solid black;
+            padding: 0; 
+            border-spacing: none; 
+         }
+         table th, table td {
+        padding: 5px;
+      }
+      th, td {
+        text-align: center;
+      }
+      </style>
 </head>
 <body>
 <h2>PPL 3323 Homework 6</h2><table>\n
