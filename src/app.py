@@ -213,6 +213,27 @@ for x in flist:
     # print(x.get_grade())
     # print(x.get_final())
 
+#Creating a temp list to append all the students with their final grades
+final0 = list()
+
+for x in alist:
+    final0.append(x)
+
+for x in blist:
+    final0.append(x)
+
+for x in clist:
+    final0.append(x)
+
+for x in dlist:
+    final0.append(x)
+
+for x in flist:
+    final0.append(x)
+
+#Creating a new sorted list with all the students sorted according to Last Name, then First
+#Name and finally ID
+final = sorted(final0, key=lambda x: x.get_last_name(), reverse=False)
 
 # Create the HTML code for the table
 #Basic HTML string for a HTML file that inclues a title and header, as well
@@ -226,18 +247,10 @@ table_html = """<html>
 
 <tr><th>ID</th><th>First</th><th>Last</th><th>Final</th></tr>\n"""
 # Data rows
-#Here we are iterating over each letter grade list, "alist" to "flist", and creating 
+#Here we are iterating over each student and creating 
 #a row, filled with that students information, ID, First Name, Last Name and Final Grade
 #Every row is added on to our original HTML string
-for student in alist:
-    table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
-for student in blist:
-    table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
-for student in clist:
-    table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
-for student in dlist:
-    table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
-for student in flist:
+for student in final:
     table_html += f"<tr><td>{student.get_id()}</td><td>{student.get_first_name()}</td><td>{student.get_last_name()}</td><td>{student.get_final()}</td></tr>\n"
 
 #This is the final bit of HTML code to make sure our HTML file is complete
