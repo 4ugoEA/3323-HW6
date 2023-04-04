@@ -34,6 +34,12 @@ class student:
     
     def get_letter(self):
         return self._letter
+
+    def set_final(self, final):
+        self.final = final
+
+    def get_final(self):
+        return self.final
         
 
 
