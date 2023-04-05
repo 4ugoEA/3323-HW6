@@ -1,4 +1,5 @@
 #author: Hugo E. Atayde
+import re
 
 #Student class to hold attributes for each student, such as id, first and last name, 
 #eager or lazy, number grade and final grade
@@ -56,10 +57,14 @@ d = "11"
 for line in contents:
     s =  [d+e for e in contents.split(d) if e]
 
+#Alternate method to find matching records using regular expressions
+pattern = re.compile(r"[0-9]+\s+[A-Za-z]+\s+[A-Za-z]+\s+\d\d\s+[A-Za-z]", re.IGNORECASE)
+results = re.findall(pattern, contents)
+
 #These lines handle any new lines that might be scattered
 #in our data and replaces them with temp character
 rest = []
-for sub in s:
+for sub in results:
     rest.append(sub.replace("\n", "|"))
 
 #These lines find any of the temp characters and then replace 
@@ -70,13 +75,9 @@ for sub in rest:
 
 #Additional string cleanup to make sure there are no 
 #temp characters left
-res = []
+Rec = []
 for sub in rest2:
-    res.append(sub.replace("|", " "))
-
-#Probably don't need Rec, but it helps to separate each 
-#step
-Rec = res
+    Rec.append(sub.replace("|", " "))
 
 #n is the number of record entries, which is also the number of students
 n = len(Rec)
@@ -277,20 +278,7 @@ print(table_html)
 
 #We create and open a new file called "output.html" and begin writing into it
 f = open('output.html', 'w')
-  
-# # the html code which will go in the file GFG.html
-# html_template = """<html>
-# <head>
-# <title>Title</title>
-# </head>
-# <body>
-# <h2>Welcome To GFG</h2>
-
-  
-# </body>
-# </html>
-# """
-  
+   
 # Writing the code from the string we created above into the file
 f.write(table_html)
   
