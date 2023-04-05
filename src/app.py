@@ -48,6 +48,7 @@ class student:
 
 #The following line parses the text file as a string 
 # and stores it in contents
+#!ASSUMES THAT THE INPUT FILE IS IN THE SAME SRC FOLDER!
 with open("src\input.txt") as f:
     contents = f.read();
 
