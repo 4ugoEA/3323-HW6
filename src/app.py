@@ -47,7 +47,7 @@ class student:
 
 #The following line parses the text file as a string 
 # and stores it in contents
-with open("src\input.txt") as f:
+with open("..\input.txt") as f:
     contents = f.read();
 
 #These lines separate each students record using the first 2 digits
