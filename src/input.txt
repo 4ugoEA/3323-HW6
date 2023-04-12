@@ -3,4 +3,17 @@ Ben Christie 50 L Chicago IL 112000002 Bern
 
 Cruz 80 L TX 113000000 Donald Clinton 85 E
 113000001 Ted Sanders 90 E AR 113000002 Carly Fiorina 98 L
-113000003 Hillary Trump 50 E NY
+113000003 Hillary Trump 50 E NY 112111001 John Smith 85 E Seattle WA 112111002
+Sarah Johnson 75 L Portland OR 112111003
+Michael Lee 80 L San Francisco CA 112111004
+
+
+Emily Davis 90 E Los Angeles CA 112111005
+David Kim 60 L Austin TX 112111006
+Rachel Chen 95 E New York NY 112111007
+
+Andrew Nguyen 70 L San Diego CA 112111008
+Jessica Wong 80 E Chicago IL 112111009
+
+William Wu 75 L Houston TX 112111010
+Lily Tran 85 E Boston MA 
