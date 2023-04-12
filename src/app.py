@@ -48,7 +48,7 @@ class student:
 
 #The following line parses the text file as a string 
 # and stores it in contents
-with open("3323-HW6\src\input.txt") as f:
+with open("../input.txt") as f:
     contents = f.read();
 
 #These lines separate each students record using the first 2 digits
@@ -78,7 +78,7 @@ for tup in results:
     stud.append(tup[1])
 
 #print(id)
-print(stud)
+#print(stud)
 
 
 #These lines handle any new lines that might be scattered
@@ -89,7 +89,7 @@ for x in stud:
     string = " ".join(x.split())
     rest.append(string)
 
-print(rest)
+#print(rest)
 
 # for sub in stud:
 #     rest.append(sub.replace("\n", "|"))
