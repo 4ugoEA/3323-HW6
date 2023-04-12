@@ -48,7 +48,7 @@ class student:
 
 #The following line parses the text file as a string 
 # and stores it in contents
-with open("..\input.txt") as f:
+with open("3323-HW6\src\input.txt") as f:
     contents = f.read();
 
 #These lines separate each students record using the first 2 digits
@@ -58,29 +58,58 @@ for line in contents:
     s =  [d+e for e in contents.split(d) if e]
 
 #Alternate method to find matching records using regular expressions
-pattern = re.compile(r"[0-9]+\s+[A-Za-z]+\s+[A-Za-z]+\s+\d\d\s+[A-Za-z]", re.IGNORECASE)
-results = re.findall(pattern, contents)
+#r"\b(\d{9})\b\s(.*?)(?=\b\d{9}\b|$)"
+
+#r"[0-9]+\s[A-Za-z0-9]+\s[A-Za-z0-9]+\s[0-9]+ [A-Za-z]\s"
+
+#pattern = re.compile(r"[0-9]+\s+[A-Za-z]+\s+[A-Za-z]+\s+\d\d\s+[A-Za-z]", re.IGNORECASE)
+#pattern = re.compile(r"[0-9]+\s[A-Za-z0-9]+\s[A-Za-z0-9]+\s[0-9]+ [A-Za-z]\s", re.IGNORECASE)
+pattern = r"\b(\d{9})\b\s(.*?)(?=\b\d{9}\b|$)"
+#results = re.findall(pattern, contents)
+results = re.findall(pattern, contents, flags=re.DOTALL)
+
+id = []
+stud = []
+
+for tup in results:
+    id.append(tup[0])
+
+for tup in results:
+    stud.append(tup[1])
+
+#print(id)
+print(stud)
+
 
 #These lines handle any new lines that might be scattered
 #in our data and replaces them with temp character
 rest = []
-for sub in results:
-    rest.append(sub.replace("\n", "|"))
 
-#These lines find any of the temp characters and then replace 
-#them with spaces
-rest2 = []
-for sub in rest:
-    rest2.append(sub.replace("||", " "))
+for x in stud:
+    string = " ".join(x.split())
+    rest.append(string)
 
-#Additional string cleanup to make sure there are no 
-#temp characters left
-Rec = []
-for sub in rest2:
-    Rec.append(sub.replace("|", " "))
+print(rest)
+
+# for sub in stud:
+#     rest.append(sub.replace("\n", "|"))
+
+# #These lines find any of the temp characters and then replace 
+# #them with spaces
+# rest2 = []
+# for sub in rest:
+#     rest2.append(sub.replace("||", " "))
+
+# #Additional string cleanup to make sure there are no 
+# #temp characters left
+# Rec = []
+# for sub in rest2:
+#     Rec.append(sub.replace("|", " "))
+
+
 
 #n is the number of record entries, which is also the number of students
-n = len(Rec)
+n = len(id)
 
 #The following lines create specific ranges of indexes, in order to separate 
 #students by their potential grades
@@ -119,10 +148,12 @@ Students = list()
 #For each record stored in Rec, we create a new student using the first 5 values in 
 #each record, which will be ID, First Name, Last Name, Number Grade, and Eager/Lazy
 #We then add each student to the list "Students"
-for x in Rec:
+count = 0
+for x in rest:
     s = x.split(" ")
-    temp = student(int(s[0]), s[1], s[2], int(s[3]), s[4], 'f')
+    temp = student(int(id[count]), s[0], s[1], int(s[2]), s[3], 'f')
     Students.append(temp)
+    count += 1
 
 # print((Students[2]).get_id())
 # print((Students[2].get_first_name()))
